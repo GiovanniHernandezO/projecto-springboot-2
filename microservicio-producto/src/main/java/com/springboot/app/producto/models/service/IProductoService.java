@@ -4,7 +4,6 @@ import com.springboot.app.producto.models.entity.Producto;
 import java.util.List;
 
 public interface IProductoService {
-
     List<Producto> findAll();
     Producto findById(Long id);
 }
