@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service
+@Service("serviceRestTemplate")
 public class ItemServiceImpl implements IItemService {
 
     @Autowired
@@ -20,6 +20,7 @@ public class ItemServiceImpl implements IItemService {
 
     @Override
     public List<Item> findAll() {
+        System.out.println("Usando REST TEMPLATE");
         List<Producto> productos = Arrays.asList(
                 clienteRest.getForObject("http://localhost:8001/productos/listar", Producto[].class));
         return productos.stream().map(p -> new Item(p, 1)).collect(Collectors.toList());
@@ -27,6 +28,7 @@ public class ItemServiceImpl implements IItemService {
 
     @Override
     public Item findById(Long id, Integer cantidad) {
+        System.out.println("Usando REST TEMPLATE");
         Map<String, String> pathVariables = new HashMap<>();
         pathVariables.put("id", id.toString());
         Producto producto = clienteRest.getForObject("http://localhost:8001/productos/{id}", Producto.class, pathVariables);

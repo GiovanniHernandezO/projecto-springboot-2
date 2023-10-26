@@ -3,6 +3,7 @@ package com.springboot.app.item.controllers;
 import com.springboot.app.item.models.Item;
 import com.springboot.app.item.service.IItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ItemController {
 
     @Autowired
+    @Qualifier("serviceFeign")
     private IItemService itemService;
 
     @GetMapping("/listar")
