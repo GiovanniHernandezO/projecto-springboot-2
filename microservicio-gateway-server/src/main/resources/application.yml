@@ -1,0 +1,42 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: servicio-productos
+          uri: lb://servicio-productos
+          predicates:
+            - Path=/api-productos/**
+          filters:
+            - StripPrefix=1
+            - FilterCookie=Hola esto es una prueba 2, usuario, GHernandez
+        - id: servicio-items
+          uri: lb://servicio-items
+          predicates:
+            - Path=/api-items/**
+          filters:
+            - StripPrefix=1
+
+
+
+#version con los argumentos
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: servicio-productos
+#          uri: lb://servicio-productos
+#          predicates:
+#            - Path=/api-productos/**
+#          filters:
+#            - StripPrefix=1
+#            - name: Ejemplo
+#              args:
+#                mensaje: Hola esto es una prueba
+#                cookieNombre: usuario
+#                cookieValor: GiovanniHernandez
+#        - id: servicio-items
+#          uri: lb://servicio-items
+#          predicates:
+#            - Path=/api-items/**
+#          filters:
+#            - StripPrefix=1

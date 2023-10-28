@@ -1,4 +1,4 @@
-package springboot.servicio.eureka.server;
+package springboot.servicio.gateway.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

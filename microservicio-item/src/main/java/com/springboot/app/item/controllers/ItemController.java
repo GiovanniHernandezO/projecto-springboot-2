@@ -2,20 +2,22 @@ package com.springboot.app.item.controllers;
 
 import com.springboot.app.item.models.Item;
 import com.springboot.app.item.service.IItemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/items")
 public class ItemController {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
 
     @Autowired
     private Environment env;
@@ -31,8 +33,13 @@ public class ItemController {
     }
 
     @GetMapping("/producto/{idProducto}/cantidad/{cantidad}")
-    public ResponseEntity<Item> getById(@PathVariable("idProducto") Long id, @PathVariable("cantidad") Integer cantidad) {
+    public ResponseEntity<Item> getById(@PathVariable("idProducto") Long id,
+                                        @PathVariable("cantidad") Integer cantidad,
+                                        @RequestHeader Map<String, String> headers) {
         verPuerto();
+        headers.forEach((key, value) -> {
+            LOGGER.info(String.format("Header '%s' = %s", key, value));
+        });
         return ResponseEntity.ok(itemService.findById(id, cantidad));
     }
 
