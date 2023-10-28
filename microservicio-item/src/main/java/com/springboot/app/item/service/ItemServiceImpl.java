@@ -22,7 +22,7 @@ public class ItemServiceImpl implements IItemService {
     public List<Item> findAll() {
         System.out.println("Usando REST TEMPLATE");
         List<Producto> productos = Arrays.asList(
-                clienteRest.getForObject("http://localhost:8001/productos/listar", Producto[].class));
+                clienteRest.getForObject("http://servicio-productos/productos/listar", Producto[].class));
         return productos.stream().map(p -> new Item(p, 1)).collect(Collectors.toList());
     }
 
@@ -31,7 +31,7 @@ public class ItemServiceImpl implements IItemService {
         System.out.println("Usando REST TEMPLATE");
         Map<String, String> pathVariables = new HashMap<>();
         pathVariables.put("id", id.toString());
-        Producto producto = clienteRest.getForObject("http://localhost:8001/productos/{id}", Producto.class, pathVariables);
+        Producto producto = clienteRest.getForObject("http://servicio-productos/productos/{id}", Producto.class, pathVariables);
         return new Item(producto, cantidad);
     }
 }
