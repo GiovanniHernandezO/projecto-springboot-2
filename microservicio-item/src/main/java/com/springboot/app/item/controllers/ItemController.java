@@ -27,7 +27,11 @@ public class ItemController {
     private IItemService itemService;
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Item>> getAll() {
+    public ResponseEntity<List<Item>> getAll(
+            @RequestParam(name = "nombre", required = false) String nombreParametro,
+            @RequestHeader(name= "token-request", required = true, defaultValue = "estoesunaprueba") String tokenRequest) {
+        LOGGER.info(String.format("nombre '%s'", nombreParametro));
+        LOGGER.info(String.format("token-request '%S'", tokenRequest));
         verPuerto();
         return ResponseEntity.ok(itemService.findAll());
     }
