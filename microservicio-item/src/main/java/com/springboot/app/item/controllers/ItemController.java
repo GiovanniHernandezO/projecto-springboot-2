@@ -9,20 +9,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+/*
+GH: RefreshScope nos permite actualizar los componentes controladores clases anotadas con @Component
+con @Service @Value Enviroment etc.... actualiza se refresca el contexto vuelve a inyectar y se vuelve a inicializar
+el componente con los cambios reflejados en tiempo real y sin tener que reinciar la aplicación y todo esto mediante
+una ruta o URL un endpoint de Spring Actuator
+ */
+
+@RefreshScope
 @RestController
 @RequestMapping("/items")
 public class ItemController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
+
+    @Value("${configuracion.texto}")
+    private String texto;
 
     @Autowired
     private CircuitBreakerFactory circuitBreakerFactory;
@@ -117,5 +132,23 @@ public class ItemController {
         producto.setPrecio(1500.00);
         item.setProducto(producto);
         return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(item));
+    }
+
+    @GetMapping("/obtener-config")
+    public ResponseEntity<?> getConfigServer(@Value("${server.port}") String puerto) {
+        LOGGER.info(String.format("texto: %s", texto));
+        LOGGER.info(String.format("puerto: %s", puerto));
+
+        Map<String, String> json = new HashMap<>();
+        json.put("texto", texto);
+        json.put("puerto", puerto);
+
+        if((env.getActiveProfiles().length > 0) && env.getActiveProfiles()[0].equalsIgnoreCase("dev")) {
+            json.put("autor.nombre", env.getProperty("configuracion.autor.nombre"));
+            json.put("autor.email", env.getProperty("configuracion.autor.email"));
+            json.put("entorno", env.getActiveProfiles()[0].toUpperCase());
+        }
+
+        return new ResponseEntity<Map<String, String>>(json, HttpStatus.OK);
     }
 }
