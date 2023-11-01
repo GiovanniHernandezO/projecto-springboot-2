@@ -37,8 +37,6 @@ public class RestTemplateConfig {
                             .timeoutDuration(Duration.ofSeconds(6L))
                             .build())
                     .build();
-
-
         });
     }
 }
