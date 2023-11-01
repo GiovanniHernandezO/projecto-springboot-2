@@ -65,8 +65,12 @@ public class ItemController {
         return ResponseEntity.ok(itemService.findById(id, cantidad));
     }
 
-    @CircuitBreaker(name = "items")
-    @TimeLimiter(name = "items", fallbackMethod = "fallbackGetByIdFuture")
+    /*
+    * GH cuando se usan las dos anotaciones combinadas, deben si o si estar el fallbackMethod
+    * en la anotacion CircuitBreaker y no en TimeLimiter
+    */
+    @CircuitBreaker(name = "items", fallbackMethod = "fallbackGetByIdFuture")
+    @TimeLimiter(name = "items")
     @GetMapping("/producto3/{idProducto}/cantidad/{cantidad}")
     public CompletableFuture<ResponseEntity<Item>> getById3(@PathVariable("idProducto") Long id,
                                                            @PathVariable("cantidad") Integer cantidad,
