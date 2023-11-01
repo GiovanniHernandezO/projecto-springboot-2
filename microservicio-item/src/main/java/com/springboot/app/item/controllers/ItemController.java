@@ -47,7 +47,7 @@ public class ItemController {
                                         @RequestHeader Map<String, String> headers) {
         verPuerto();
         headers.forEach((key, value) -> {
-            LOGGER.info(String.format("Header '%s' = %s", key, value));
+            LOGGER.trace(String.format("Header '%s' = %s", key, value));
         });
         return circuitBreakerFactory.create("items")
                 .run(() -> ResponseEntity.ok(itemService.findById(id, cantidad)),
