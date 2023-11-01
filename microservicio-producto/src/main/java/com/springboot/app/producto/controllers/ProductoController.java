@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/productos")
@@ -29,8 +30,15 @@ public class ProductoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<Producto> getById(@PathVariable("id") Long id) throws InterruptedException {
         verPuerto();
+        if (id.equals(10L)) {
+            throw  new IllegalStateException("Producto no encontrado");
+        }
+        if (id.equals(7L)) {
+            TimeUnit.SECONDS.sleep(5L);
+        }
+
         return ResponseEntity.ok(productoService.findById(id));
     }
 

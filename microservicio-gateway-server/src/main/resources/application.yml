@@ -6,11 +6,6 @@ spring:
           uri: lb://servicio-productos
           predicates:
             - Path=/api-productos/**
-            - Header=token, \d+
-            - Header=Content-Type, application/json
-            - Method=GET, POSTç
-            - Query=color, verde
-            - Cookie=color, azul
           filters:
             - StripPrefix=1
             - FilterCookie=Hola esto es una prueba 2, usuario, GHernandez
@@ -20,11 +15,6 @@ spring:
             - Path=/api-items/**
           filters:
             - StripPrefix=1
-            - AddRequestHeader=token-request, 12345678
-            - AddResponseHeader=token-response, 87654321
-            - AddRequestParameter=nombre, GiovanniH
-            - SetResponseHeader=Content-Type, text/plain
-            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
 
 
 
