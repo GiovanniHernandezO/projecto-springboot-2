@@ -1,3 +1,24 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      defecto:
+        slidingWindowSize: 6
+        failureRateThreshold: 50
+        waitDurationInOpenState: 20s
+        permittedNumberOfCallsInHalfOpenState: 4
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 2s
+    instances:
+      productos:
+        baseConfig: defecto
+  timelimiter:
+    configs:
+      defecto:
+        timeoutDuration: 2s
+    instances:
+      productos:
+        baseConfig: defecto
+
 spring:
   cloud:
     gateway:
@@ -7,6 +28,11 @@ spring:
           predicates:
             - Path=/api-productos/**
           filters:
+            - name: CircuitBreaker
+              args:
+                name: productos
+                statusCodes: 500
+                fallbackUri: forward:/api-items/items/producto/2/cantidad/5
             - StripPrefix=1
             - FilterCookie=Hola esto es una prueba 2, usuario, GHernandez
         - id: servicio-items
