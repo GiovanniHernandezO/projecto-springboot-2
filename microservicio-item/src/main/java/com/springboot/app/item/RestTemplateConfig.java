@@ -19,6 +19,11 @@ public class RestTemplateConfig {
         return new RestTemplate();
     }
 
+    /*
+    GH: esta configuracion no funciona en caso de que el CircuitBreaker es usado con la anotacion @CircuitBreaker
+    para usar la anotacion debe estar configurado en el application.yml o application.properties
+    La forma de abajo solo sirve a traves de la inyeccion de CircuitBreakerFactory
+     */
     @Bean
     public Customizer<Resilience4JCircuitBreakerFactory> defaulCustomizer() {
         return factory -> factory.configureDefault(id -> {
