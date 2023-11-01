@@ -4,12 +4,11 @@ import com.springboot.app.producto.models.entity.Producto;
 import com.springboot.app.producto.models.service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +25,8 @@ public class ProductoController {
     @GetMapping("/listar")
     public ResponseEntity<List<Producto>> getAll() {
         verPuerto();
-        return ResponseEntity.ok(productoService.findAll());
+        //return ResponseEntity.ok(productoService.findAll());
+        return new ResponseEntity<List<Producto>>(productoService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -41,6 +41,36 @@ public class ProductoController {
 
         return ResponseEntity.ok(productoService.findById(id));
     }
+
+    @PostMapping("/crear")
+    public ResponseEntity<Producto> save(@RequestBody Producto producto) {
+        //return ResponseEntity.ok(productoService.save(producto));
+        return new ResponseEntity<Producto>(productoService.save(producto), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/actualizar/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Producto> update(@RequestBody Producto producto, @PathVariable Long id) {
+        Producto productoDB = productoService.findById(id);
+        productoDB.setNombre(producto.getNombre());
+        productoDB.setPrecio(producto.getPrecio());
+        return new ResponseEntity<Producto>(productoService.save(productoDB), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        productoService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /*
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        productoService.deleteById(id);
+        ResponseEntity.noContent();
+    }
+    * */
 
     private void verPuerto() {
         System.out.println("puerto que está usando proyecto Producto: " + env.getProperty("local.server.port"));

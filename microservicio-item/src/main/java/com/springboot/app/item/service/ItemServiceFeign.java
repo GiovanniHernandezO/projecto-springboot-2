@@ -2,6 +2,7 @@ package com.springboot.app.item.service;
 
 import com.springboot.app.item.clientes.IProductoClienteRest;
 import com.springboot.app.item.models.Item;
+import com.springboot.app.item.models.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,21 @@ public class ItemServiceFeign implements IItemService {
     public Item findById(Long id, Integer cantidad) {
         System.out.println("Usando FEIGN");
         return new Item(productoClienteRest.getById(id), cantidad);
+    }
+
+    @Override
+    public Producto save(Producto producto) {
+        return productoClienteRest.save(producto);
+    }
+
+    @Override
+    public Producto update(Producto producto, Long id) {
+        return productoClienteRest.update(producto, id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        productoClienteRest.delete(id);
     }
 }
 

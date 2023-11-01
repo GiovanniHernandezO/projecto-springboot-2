@@ -46,6 +46,7 @@ public class ItemController {
     private Environment env;
 
     @Autowired
+    //@Qualifier("serviceFeign")
     @Qualifier("serviceFeign")
     private IItemService itemService;
 
@@ -119,7 +120,8 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    public CompletableFuture<ResponseEntity<Item>> fallbackGetByIdFuture(Long id, Integer cantidad, Map<String, String> headers, Throwable e) {
+    public CompletableFuture<ResponseEntity<Item>> fallbackGetByIdFuture(
+            Long id, Integer cantidad, Map<String, String> headers, Throwable e) {
         LOGGER.error("Error controlado - " + e.getMessage());
         LOGGER.error("Error controlado - " + e.getLocalizedMessage());
 
@@ -150,5 +152,21 @@ public class ItemController {
         }
 
         return new ResponseEntity<Map<String, String>>(json, HttpStatus.OK);
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<Producto> createProducto(@RequestBody Producto producto) {
+        return new ResponseEntity<>(itemService.save(producto), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Producto> updateProducto(@RequestBody Producto producto, @PathVariable Long id) {
+        return new ResponseEntity<>(itemService.update(producto, id), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarProducto(@PathVariable Long id) {
+        itemService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
