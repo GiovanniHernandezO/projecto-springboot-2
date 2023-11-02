@@ -1,4 +1,4 @@
-package com.springboot.app.producto.models.entity;
+package springboot.servicio.commons.models.entity;
 
 import jakarta.persistence.*;
 

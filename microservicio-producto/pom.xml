@@ -18,6 +18,13 @@
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>springboot.servicio.commons</groupId>
+			<artifactId>springboot-servicio-commons</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- INTERNAS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

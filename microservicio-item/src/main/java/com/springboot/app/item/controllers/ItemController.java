@@ -1,7 +1,7 @@
 package com.springboot.app.item.controllers;
 
 import com.springboot.app.item.models.Item;
-import com.springboot.app.item.models.Producto;
+import springboot.servicio.commons.models.entity.Producto;
 import com.springboot.app.item.service.IItemService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;

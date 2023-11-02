@@ -2,7 +2,7 @@ package com.springboot.app.item.service;
 
 import com.springboot.app.item.clientes.IProductoClienteRest;
 import com.springboot.app.item.models.Item;
-import com.springboot.app.item.models.Producto;
+import springboot.servicio.commons.models.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;

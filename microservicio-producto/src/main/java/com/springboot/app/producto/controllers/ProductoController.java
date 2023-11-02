@@ -1,6 +1,6 @@
 package com.springboot.app.producto.controllers;
 
-import com.springboot.app.producto.models.entity.Producto;
+import springboot.servicio.commons.models.entity.Producto;
 import com.springboot.app.producto.models.service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 

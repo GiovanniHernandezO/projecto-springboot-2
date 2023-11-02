@@ -1,7 +1,7 @@
 package com.springboot.app.item.service;
+import springboot.servicio.commons.models.entity.Producto;
 
 import com.springboot.app.item.models.Item;
-import com.springboot.app.item.models.Producto;
 
 import java.util.List;
 

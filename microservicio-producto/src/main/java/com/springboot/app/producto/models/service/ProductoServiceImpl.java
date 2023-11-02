@@ -1,7 +1,7 @@
 package com.springboot.app.producto.models.service;
 
 import com.springboot.app.producto.models.dao.ProductoDao;
-import com.springboot.app.producto.models.entity.Producto;
+import springboot.servicio.commons.models.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
