@@ -13,6 +13,7 @@
         <module name="springboot-servicio-gateway-server" />
         <module name="springboot-servicio-commons" />
         <module name="springboot-servicio-producto" />
+        <module name="springboot-servicio-usuarios-commons" />
       </profile>
     </annotationProcessing>
   </component>
@@ -25,6 +26,7 @@
       <module name="springboot-servicio-item" options="-parameters" />
       <module name="springboot-servicio-producto" options="-parameters" />
       <module name="springboot-servicio-usuarios" options="-parameters" />
+      <module name="springboot-servicio-usuarios-commons" options="-parameters" />
     </option>
   </component>
 </project>

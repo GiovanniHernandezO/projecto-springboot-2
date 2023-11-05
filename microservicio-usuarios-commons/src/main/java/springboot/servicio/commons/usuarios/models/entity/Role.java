@@ -1,4 +1,4 @@
-package springboot.servicio.usuarios.models.entity;
+package springboot.servicio.commons.usuarios.models.entity;
 
 import jakarta.persistence.*;
 

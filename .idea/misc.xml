@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/microservicio-config-server/pom.xml" />
         <option value="$PROJECT_DIR$/microservicio-commons/pom.xml" />
         <option value="$PROJECT_DIR$/microservicio-usuarios/pom.xml" />
+        <option value="$PROJECT_DIR$/microservicio-usuarios-commons/pom.xml" />
       </list>
     </option>
   </component>
