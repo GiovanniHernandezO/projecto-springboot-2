@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unnamed">
+    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
+    <root id="archive" name="unnamed.jar">
+      <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:6.1.5" />
+      <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:6.1.2" />
+      <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:6.1.5" />
+    </root>
+  </artifact>
+</component>

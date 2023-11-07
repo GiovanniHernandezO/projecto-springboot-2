@@ -11,7 +11,7 @@ import springboot.servicio.commons.usuarios.models.entity.Usuario;
 public interface IUsuarioDAO extends CrudRepository<Usuario, Long> {
 
     @RestResource(path = "buscar-username")
-    Usuario findByUsername(@Param("nombre") String username);
+    Usuario findByUsername(@Param("username") String username);
 
     @RestResource(path = "obtener-por-query")
     @Query(value = "select u from Usuario u where u.username = ?1")
