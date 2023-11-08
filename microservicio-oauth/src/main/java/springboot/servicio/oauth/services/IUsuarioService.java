@@ -5,4 +5,6 @@ import springboot.servicio.commons.usuarios.models.entity.Usuario;
 public interface IUsuarioService {
 
     Usuario findByUsername(String username);
+
+    Usuario update(Usuario usuario, Long id);
 }

@@ -25,6 +25,16 @@ public class Usuario implements Serializable {
     @Column(unique = true, length = 255)
     private String email;
 
+    private Integer intentos;
+
+    public Integer getIntentos() {
+        return intentos;
+    }
+
+    public void setIntentos(Integer intentos) {
+        this.intentos = intentos;
+    }
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "usuarios_roles",
             joinColumns = @JoinColumn(name = "usuario_id"),
