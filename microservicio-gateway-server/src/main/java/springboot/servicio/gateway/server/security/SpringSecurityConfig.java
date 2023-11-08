@@ -24,7 +24,7 @@ public class SpringSecurityConfig {
                         "/api-productos/productos/listar",
                         "/api-items/items/listar",
                         "/api-usuarios/usuarios",
-                        "/api-items/items/produtos/{id}/cantidad/{id}",
+                        "/api-items/items/produtos/{id}/cantidad/{cantidad}",
                         "/api-productos/{id}").permitAll()
                 .pathMatchers(HttpMethod.GET,
                         "/api-usuarios/usuarios/{id}").hasAnyRole("ADMIN", "USER")
